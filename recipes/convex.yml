@@ -1,0 +1,19 @@
+# Ingest both Liner Notes Convex deployments into a local DataHub quickstart.
+# Deploy keys come from the environment — never write them into this file.
+#   export $(grep -v '^#' ../.env.local | xargs)   # or source your own env
+#   datahub ingest -c recipes/convex.yml
+source:
+  type: convex
+  config:
+    deployments:
+      - name: rm-playlist-v2
+        url: https://precise-fish-444.convex.cloud
+        deploy_key: ${CONVEX_SOURCE_DEPLOY_KEY}
+      - name: liner-notes
+        url: https://dusty-crocodile-663.convex.cloud
+        deploy_key: ${CONVEX_LINER_NOTES_DEPLOY_KEY}
+
+sink:
+  type: datahub-rest
+  config:
+    server: http://localhost:8080

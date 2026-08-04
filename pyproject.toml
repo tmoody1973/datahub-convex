@@ -1,8 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
-name = "datahub-connector-convex"
+name = "datahub-convex"
 version = "0.1.0"
-description = "Convex -> DataHub ingestion source (recipe-driven). Built in MOO-460."
+description = "Convex ingestion source for DataHub: tables, schemas, and row counts via Convex's streaming export API."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9,<3.13"
 license = { text = "Apache-2.0" }
-dependencies = []
+authors = [{ name = "Radio Milwaukee / Liner Notes contributors" }]
+keywords = ["datahub", "convex", "metadata", "ingestion"]
+dependencies = [
+  "acryl-datahub>=0.14.0",
+  "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.entry-points."datahub.ingestion.source.plugins"]
+convex = "datahub_convex.source:ConvexSource"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/datahub_convex"]
