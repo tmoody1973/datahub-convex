@@ -14,6 +14,23 @@ and lands in DataHub:
 Licensed Apache 2.0. Built for the Build with DataHub Agent Hackathon; structured for
 upstream submission.
 
+## Install (standalone)
+
+```sh
+pip install "git+https://github.com/tmoody1973/datahub-convex.git"
+# then: datahub ingest -c recipes/convex.yml   (see Recipe below)
+```
+
+## Provenance
+
+Built for the Build with DataHub Agent Hackathon as part of
+[Liner Notes](https://github.com/tmoody1973/liner-notes), where it ingests two
+production Convex deployments. Also submitted upstream to
+[datahub-project/datahub](https://github.com/datahub-project/datahub)
+(branch [`feat/convex-ingestion-source`](https://github.com/tmoody1973/datahub/tree/feat/convex-ingestion-source)).
+The copy in the Liner Notes monorepo is the working source of truth until the
+upstream PR lands; this repo mirrors it for standalone use.
+
 ## Requirements
 
 - Python 3.9–3.12 (`uv venv --python 3.11` works well)
