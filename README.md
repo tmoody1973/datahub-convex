@@ -14,6 +14,50 @@ and lands in DataHub:
 Licensed Apache 2.0. Built for the Build with DataHub Agent Hackathon; structured for
 upstream submission.
 
+## What it does, in plain English
+
+[Convex](https://convex.dev) is the database behind a lot of modern web and
+mobile apps. [DataHub](https://datahubproject.io) is an open-source catalog —
+the place a data team goes to answer "what data do we have, what shape is it,
+and can we trust it?" Until now those two didn't talk: your warehouse and
+dashboards showed up in the catalog, but the Convex tables actually powering
+your product were invisible.
+
+This connector fixes that. Point it at a Convex deployment (all it needs is a
+read-only deploy key) and it walks every table through Convex's built-in
+streaming export API, then registers what it finds in DataHub:
+
+- your **deployment** appears as a container, like a database;
+- every **table** appears as a dataset inside it, with its full field-by-field
+  schema — including nested objects, unions, and references between tables;
+- each table shows its **exact row count**, so you can see at a glance what's
+  big, what's empty, and what changed since the last run.
+
+Re-running it is safe: it updates what's already there instead of duplicating.
+Nothing is installed on the Convex side, and it never writes to your app's
+data — it only reads structure and counts.
+
+## Use it on your own Convex app
+
+```sh
+# 1. Install (alongside the DataHub CLI it plugs into)
+pip install "git+https://github.com/tmoody1973/datahub-convex.git"
+
+# 2. Get a read-only deploy key for your deployment
+#    Convex dashboard → your project → Settings → Deploy keys
+#    (scope "deployment:data:view" is enough), or:
+cd your-app && npx convex deployment token create datahub
+
+# 3. Write a recipe (see the Recipe section below) and run:
+export CONVEX_DEPLOY_KEY='...'
+datahub ingest -c your-recipe.yml
+
+# 4. Browse http://localhost:9002 → search your table names
+```
+
+If you don't have DataHub running yet, `datahub docker quickstart` brings one
+up locally in Docker — this connector works against it unmodified.
+
 ## Install (standalone)
 
 ```sh
