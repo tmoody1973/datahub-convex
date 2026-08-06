@@ -37,6 +37,35 @@ Re-running it is safe: it updates what's already there instead of duplicating.
 Nothing is installed on the Convex side, and it never writes to your app's
 data — it only reads structure and counts.
 
+## Why would you use it? (use cases)
+
+- **See your product data next to your analytics data.** Most teams catalog
+  the warehouse but not the operational database actually running the app.
+  If Convex is your backend, this puts those tables in the same catalog your
+  data team already searches — with schemas and row counts, not tribal
+  knowledge.
+- **Impact analysis before schema changes.** Once Convex tables are in
+  DataHub, you can attach lineage from them to whatever consumes them
+  (exports, ETL jobs, ML features, dashboards) and answer "what breaks if I
+  rename this field?" before you rename it.
+- **Governance over app data.** DataHub's assertions, incidents, owners,
+  domains, and glossary all work on Convex datasets once they're ingested —
+  quality checks on user tables, PII tagging, ownership for on-call. (This is
+  exactly how [Liner Notes](https://github.com/tmoody1973/liner-notes) uses
+  it: an AI steward agent reads and writes governance state over ingested
+  Convex tables.)
+- **Growth and drift monitoring.** Each run records exact row counts as
+  dataset profiles, so the catalog keeps a history — spot a table that
+  suddenly doubled or a queue that never drains.
+- **Onboarding and discovery.** New engineers and data scientists can search
+  "what tables does our app have?" instead of reading the schema file — field
+  descriptions include cross-table references (`Id(<table>)`), so the data
+  model is browsable.
+- **AI agents over app data.** Anything that speaks to DataHub's MCP Server
+  (Claude, other agents) can now see your Convex schema and metadata as
+  context — the connector is the bridge that puts app data in the agent's
+  world model.
+
 ## Use it on your own Convex app
 
 ```sh
