@@ -19,7 +19,7 @@ upstream submission.
 - Python 3.9–3.12 (`uv venv --python 3.11` works well)
 - Docker (for the DataHub quickstart)
 - A Convex deploy key per deployment — read-only scope `deployment:data:view` is enough
-  (Convex dashboard → Settings → Deploy keys, or `npx convex deployment token create`)
+  (Convex dashboard → Settings → Deploy keys, or `npx convex deployment token create <name>`)
 
 ## Quickstart (copy-paste)
 

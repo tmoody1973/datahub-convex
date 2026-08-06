@@ -3,7 +3,7 @@
 # DataHub quickstart.
 #
 # CONVEX_URL is written to convex/.env.local by `npx convex dev`.
-# The deploy key comes from `npx convex deployment token create` (run in convex/).
+# The deploy key comes from `npx convex deployment token create judge` (run in convex/).
 #   export CONVEX_URL='https://<your-deployment>.convex.cloud'
 #   export CONVEX_LINER_NOTES_DEPLOY_KEY='...'
 #   datahub ingest -c recipes/convex.judge.yml
