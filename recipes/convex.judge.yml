@@ -1,0 +1,21 @@
+# Judge-mode recipe: ingest YOUR Liner Notes deployment (the one
+# `npx convex dev` created and `npm run seed` filled) into a local
+# DataHub quickstart.
+#
+# CONVEX_URL is written to convex/.env.local by `npx convex dev`.
+# The deploy key comes from `npx convex deployment token create` (run in convex/).
+#   export CONVEX_URL='https://<your-deployment>.convex.cloud'
+#   export CONVEX_LINER_NOTES_DEPLOY_KEY='...'
+#   datahub ingest -c recipes/convex.judge.yml
+source:
+  type: convex
+  config:
+    deployments:
+      - name: liner-notes
+        url: ${CONVEX_URL}
+        deploy_key: ${CONVEX_LINER_NOTES_DEPLOY_KEY}
+
+sink:
+  type: datahub-rest
+  config:
+    server: http://localhost:8080
